@@ -104,7 +104,9 @@ public class NoticeController {
 	
 	// 특정 조건으로 공지사항 상세 검색
 	@GetMapping("/searchNotice")
-	public String searchAdminMember(@RequestParam( name = "noticeType" ) String noticeType
+	public String searchAdminMember(@RequestParam( value= "noticeType", required=false) String noticeType
+								  , @RequestParam( value= "release", required=false ) String release
+								  , @RequestParam( value= "status", required=false ) String status
 								  , @RequestParam( name = "keyword" ) String keyword
 								  , @RequestParam( name = "nowPage", defaultValue = "1") Integer nowPage
 								  , @RequestParam( name = "cntPerPage", defaultValue = "10") Integer cntPerPage
@@ -112,10 +114,10 @@ public class NoticeController {
 								  , NoticeVO noticeVO) {
 		
 		// 조건 파악 공지사항 or 이벤트
-		if(noticeType.equals("n1")) {
-			
+		 
+		if (release == null & status == null) {	
 			// 전체 조회될 공지사항 타입이 n1인 수 카운트
-			int total = noticeService.countNoticeType1n();
+			int total = noticeService.countNotice();
 			PagingVO pagingVO = new PagingVO(total, nowPage, cntPerPage);
 			
 			// 공지사항인 경우 검색기능 수행
@@ -125,28 +127,11 @@ public class NoticeController {
 			model.addAttribute("paging", pagingVO);
 			model.addAttribute("n1", noticeType);
 			
-			
-			
-			
-		} else if(noticeType.equals("n2")) {
-			  
-				// 전체 조회될 공지사항 타입이 n2인 수 카운트
-			int total = noticeService.countNoticeType2n();
-			PagingVO pagingVO = new PagingVO(total, nowPage, cntPerPage);
-			  
-			  //이벤트인 경우 검색기능 수행
-			noticeVO.setTitle(keyword);
-			List<NoticeVO> list = noticeService.searchNoticeByTitle2n(noticeVO, pagingVO);
-			  model.addAttribute("list", list); 
-			  model.addAttribute("paging", pagingVO);
-			  model.addAttribute("n2", noticeType);
-			  
-			  }
-			 
+
 		
 		// 검색결과 기억을 위해 keyword와 searchBy 담기
 		model.addAttribute("keyword", keyword);
-		model.addAttribute("noticeType", noticeType);
+		model.addAttribute("noticeType", noticeType);}
 		
 		return "/notice/noticeList";
 	}

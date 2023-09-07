@@ -355,7 +355,7 @@ section.notice {
 		<!-- 일반회원(A1)or 로그인x인 경우 검색 div  -->
 		<!--   <div  th:if="${session.sessionAuthority} == 'A1'"> -->
 		<div 
-			th:if="${session.sessionAuthority == 'A1' or session.sessionAuthority == null}">
+			th:if="${session.sessionAuthority == 'A1' or session.sessionAuthority == 'A4' or session.sessionAuthority == null}">
 
 			<div id="noticeType" class="mb-3"
 				style="float: left; margin-left: 15%; margin-right: 20px">
@@ -522,6 +522,7 @@ section.notice {
 
 			let value = $('#searchByNoticeType').val();
 			let keyword = $('#keyword').val();
+			//검색기능 매핑주소
 			location.href = '/searchNotice?noticeType=' + value + '&keyword='
 					+ keyword;
 

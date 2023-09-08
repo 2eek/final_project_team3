@@ -115,9 +115,12 @@ public class NoticeController {
 		
 		// 조건 파악 공지사항 or 이벤트
 		 
-		if (release == null & status == null) {	
+		System.out.println("노티스타입:"+noticeType);
+		System.out.println("공개대상:"+release);
+		System.out.println("공개상태:"+status);
+			
 			// 전체 조회될 공지사항 타입이 n1인 수 카운트
-			int total = noticeService.countNotice();
+			int total = noticeService.countNoticeValue();
 			PagingVO pagingVO = new PagingVO(total, nowPage, cntPerPage);
 			
 			// 공지사항인 경우 검색기능 수행
@@ -131,7 +134,9 @@ public class NoticeController {
 		
 		// 검색결과 기억을 위해 keyword와 searchBy 담기
 		model.addAttribute("keyword", keyword);
-		model.addAttribute("noticeType", noticeType);}
+		model.addAttribute("noticeType", noticeType);
+		model.addAttribute("release", release);
+		model.addAttribute("status", status);
 		
 		return "/notice/noticeList";
 	}

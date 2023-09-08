@@ -31,7 +31,7 @@ public interface NoticeService {
 	//게시글 수정적용
 	public String modifyNoticeInfo(NoticeVO noticeVO);
 	//전체 조회될 공지사항 타입이 n1인 수 카운트
-	public int countNotice();
+	public int countNoticeValue();
 	
 
 	// 제목으로 공지사항 검색

@@ -70,8 +70,8 @@ public class NoticeServiceImpl implements NoticeService {
 		}
 	}
 	//게시물 타입이 공지사항(n1)인 게시글 갯수 카운트
-	public int countNotice() {
-		return noticeMapper.countNotice(); 	
+	public int countNoticeValue() {
+		return noticeMapper.countNoticeValue(); 	
 	}
 	
 	

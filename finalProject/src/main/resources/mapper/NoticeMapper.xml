@@ -81,7 +81,7 @@
 	</insert>
 	
 
-<select id="countNotice">
+<select id="countNoticeValue">
   SELECT COUNT(*)
   FROM notice
   WHERE 1=1 
@@ -128,19 +128,19 @@
       FROM notice
       WHERE 1=1 
       <!-- notice_Type 조건 추가 -->
-      <if test="noticeVO.noticeType != null">
+      <if test="noticeVO != null and noticeVO.noticeType != null">
         AND notice_Type = #{noticeVO.noticeType}
       </if>
       <!-- release 조건 추가 -->
-      <if test="noticeVO.release != null">
+      <if test="noticeVO != null and noticeVO.release != null">
         AND release = #{noticeVO.release}
       </if>
       <!-- STATUS 조건 추가 -->
-      <if test="noticeVO.status != null">
+      <if test="noticeVO != null and noticeVO.status != null">
         AND STATUS = #{noticeVO.status}
       </if>
       <!-- title 조건 추가 -->
-      <if test="noticeVO.title != null">
+      <if test="noticeVO != null and noticeVO.title != null">
         AND title LIKE '%${noticeVO.title}%'
       </if>
       ORDER BY regist_date DESC

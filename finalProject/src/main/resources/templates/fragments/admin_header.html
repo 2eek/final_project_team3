@@ -107,10 +107,14 @@
                 <div class="row">
                     <div class="col-lg-10">
                         <nav class="main-menu">
+							<!-- 실험용 -->
                             <ul>
-                                <li><a href="/tripRecordList">여행기록</a></li>
-                                <li><a href="/tripMateList">여행메이트</a></li>
-                                <li><a href="/localTourInfo">관광정보</a></li>
+                                <li><a href="/tripRecordList">여행기록</a>
+                                </li>
+                                <li><a href="/tripMateList">여행메이트</a>
+                                </li>
+                                <li><a href="/localTourInfo">관광정보</a>
+                                </li>
                                 <li><a href="/festival">축제정보</a></li>
                                 <li><a href="/localTourStatistics">관광통계</a></li>
                                 <li><a href="/lodging">숙박정보</a></li>
@@ -148,6 +152,38 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <!-- dropdown을 위한 복제본 -->
+                <div class="custom-dropdown-menu" style="display: none;">
+	                <div class="row">
+	                    <div class="col-lg-10">
+	                        <nav class="main-menu">
+								<!-- 실험용 -->
+	                            <ul>
+	                                <li><a href="/tripRecordList">여행기록</a>
+	                                </li>
+	                                <li><a href="/tripMateList">여행메이트</a>
+	                                </li>
+	                                <li><a href="/localTourInfo">관광정보</a>
+	                                </li>
+	                                <li><a href="/festival">축제정보</a></li>
+	                                <li><a href="/localTourStatistics">관광통계</a></li>
+	                                <li><a href="/lodging">숙박정보</a></li>
+	                                <li><a href="/specialtiesList">특산물구매</a></li>
+	                                <li><a href="/packageList">패키지구매</a></li>
+	                                <li sec:authorize="!hasRole('ROLE_A3')"><a href="/">마이페이지</a></li>
+	                                <li><a href="/common/cartList">장바구니</a></li>
+	                                <li sec:authorize="hasAnyRole('ROLE_A1', 'ROLE_A4')"><a href="/common/myPage">마이페이지</a></li>
+	                                <li sec:authorize="hasRole('ROLE_A2')"><a href="/guide/main">마이페이지</a></li>
+	                                <li sec:authorize="hasRole('ROLE_A3')"><a href="/admin/seeAllMemberList">관리자페이지</a></li>
+	                                <li sec:authorize="hasRole('ROLE_A3')"><a href="/admin/specialtiesInsertForm">특산물등록</a></li>
+	                                <li sec:authorize="hasRole('ROLE_A2')"><a href="/guide/packageInsertForm">패키지등록</a></li>
+	                            </ul>
+	                        </nav>
+	                    </div>
+	                    <div class="col-lg-2">
+	                    </div>
+	                </div>
                 </div>
             </div>
         </div>
@@ -201,6 +237,21 @@
             </div>
         </div>
     </header>
+        <script>
+        $(document).ready(function () {
+            // 메인 메뉴 아이템에 마우스를 올리면 드롭다운 메뉴를 표시합니다.
+            $(".main-menu li").hover(
+                function () {
+                    $(".custom-dropdown-menu").stop().css({display: "block", opacity: 0}).animate({opacity: 1}, 300); // 드롭다운 메뉴를 나타나도록 페이드인 애니메이션을 사용합니다.
+                },
+                function () {
+                    $(".custom-dropdown-menu").stop().animate({opacity: 0}, 300, function () {
+                        $(this).css({display: "none"});
+                    }); // 드롭다운 메뉴를 사라지도록 페이드아웃 애니메이션을 사용합니다.
+                }
+            );
+        });
+    </script>
     <!-- Header End -->
 </th:block>
 </body>
